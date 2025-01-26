@@ -2,7 +2,7 @@ package com.ohgiraffers.section01.array;
 
 public class Application3 {
     public static void main(String[] args) {
-        /* 수업목표. 배열에 초기ㅗ하 되는 자료형별 기본값을 이해할 수 있다. */
+        /* 수업목표. 배열에 초기화 되는 자료형별 기본값을 이해할 수 있다. */
         /* 설명.
         *   정수: 0
         *   실수: 0.0
