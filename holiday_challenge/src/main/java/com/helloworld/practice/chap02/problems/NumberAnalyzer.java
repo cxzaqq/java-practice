@@ -21,7 +21,12 @@ public class NumberAnalyzer {
     public int sumOfEvenNumbers(int number) {
 
         // 여기에 코드 작성(return 구문도 수정 필요하면 수정)
-        return 0;
+        int sum = 0;
+        for (int i = 2; i <= number; i += 2) {
+            sum += i;
+        }
+
+        return sum;
     }
 
     public static void main(String[] args) {

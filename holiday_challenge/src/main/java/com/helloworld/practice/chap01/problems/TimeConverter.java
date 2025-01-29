@@ -14,13 +14,18 @@ public class TimeConverter {
      * 7200초는 2시간 0분 0초입니다.
      * 45초는 0시간 0분 45초입니다.
      *
-     * @param seconds 변환할 조 단위 시간
+     * @param seconds 변환할 초 단위 시간
      * @return "시:분:초" 형식의 문자열
      */
     public String convertSeconds(int seconds) {
 
         // 여기에 코드 작성(return 구문도 수정 필요하면 수정)
-        return "";
+        int remain = seconds;
+        int hour = seconds / 3600;
+        remain = remain % 3600;
+        int minute = remain / 60;
+        remain = remain % 60;
+        return hour + "시간 " + minute + "분 " + remain + "초";
     }
 
     public static void main(String[] args) {

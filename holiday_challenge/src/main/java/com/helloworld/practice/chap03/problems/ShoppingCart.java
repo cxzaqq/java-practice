@@ -40,18 +40,28 @@ public class ShoppingCart {
     public boolean addItem(String item, int price) {
 
         // 여기에 코드 작성(return 구문도 수정 필요하면 수정)
-        return false;
+        if (itemCount >= MAX_ITEMS) return false;
+
+        items[itemCount] = item;
+        prices[itemCount] = price;
+        itemCount++;
+        return true;
     }
 
     public void printCart() {
 
         // 여기에 코드 작성
+        for (int i = 0; i < itemCount; i++) {
+            System.out.println((i + 1) + ". " + items[i] + " (" + prices[i] + "원)");
+        }
     }
 
     public int calculateTotal() {
 
         // 여기에 코드 작성(return 구문도 수정 필요하면 수정)
-        return 0;
+        int sum = 0;
+        for (int i = 0; i < itemCount; i++) sum += prices[i];
+        return sum;
     }
 
     public static void main(String[] args) {

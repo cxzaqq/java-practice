@@ -22,7 +22,14 @@ public class PrimeChecker {
     public boolean isPrime(int number) {
 
         // 여기에 코드 작성(return 구문도 수정 필요하면 수정)
-        return false;
+        boolean isPrime = true;
+        for (int i = 2; i < number; i++) {
+            if (number % i == 0) {
+                isPrime = false;
+                break;
+            }
+        }
+        return isPrime;
     }
 
     public static void main(String[] args) {

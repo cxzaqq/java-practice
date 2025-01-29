@@ -16,7 +16,6 @@ public class StudentGrade {
      *
      * 예상 흐름:
      * 학생들과 학생별 획득 점수(배열)
-     * 이 때 상품명과 상품의 단가가 같이 전달 된다.
      *
      * 예상 출력:
      * [학생 성적 분석 결과]
@@ -33,7 +32,10 @@ public class StudentGrade {
     public double calculateAverage() {
 
         // 여기에 코드 작성(return 구문도 수정 필요하면 수정)
-        return 0.0;
+        int sum = 0;
+        for (int score : scores)
+            sum += score;
+        return sum / (double) scores.length;
     }
 
     /**
@@ -47,7 +49,11 @@ public class StudentGrade {
     public int findHighestScore() {
 
         // 여기에 코드 작성(return 구문도 수정 필요하면 수정)
-        return 0;
+        int highestScore = 0;
+        for (int score : scores)
+            if (score > highestScore)
+                highestScore = score;
+        return highestScore;
     }
 
     public static void main(String[] args) {

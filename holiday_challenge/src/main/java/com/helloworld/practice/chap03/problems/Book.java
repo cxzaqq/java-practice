@@ -38,13 +38,23 @@ public class Book {
     public boolean borrowBook() {
 
         // 여기에 코드 작성(return 구문도 수정 필요하면 수정)
-        return false;
+        if (borrowed) {
+            return false;
+        } else {
+            borrowed = true;
+            return true;
+        }
     }
 
     public boolean returnBook() {
 
         // 여기에 코드 작성(return 구문도 수정 필요하면 수정)
-        return false;
+        if (borrowed) {
+            borrowed = false;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public String getTitle() {

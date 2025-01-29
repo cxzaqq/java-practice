@@ -26,7 +26,19 @@ public class PatternFinder {
     public int findPattern(String text, String pattern) {
 
         // 여기에 코드 작성(return 구문도 수정 필요하면 수정)
-        return 0;
+        int count = 0;
+
+        String lowerText = text.toLowerCase();
+        String lowerPattern = pattern.toLowerCase();
+
+        for (int i = 0; i <= lowerText.length() - lowerPattern.length(); i++) {
+            int idx = lowerText.indexOf(lowerPattern, i);
+            if (idx != -1) {
+                count++;
+                i = idx + 1;
+            }
+        }
+        return count;
     }
 
     public static void main(String[] args) {

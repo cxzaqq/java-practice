@@ -27,7 +27,8 @@ public class CircleCalculator {
     public double calculateArea(double radius) {
 
         // 여기에 코드 작성(return 구문도 수정 필요하면 수정)
-        return 0.0;
+        final double PI = 3.14159;
+        return PI * radius * radius;
     }
 
     public static void main(String[] args) {
@@ -39,7 +40,7 @@ public class CircleCalculator {
         System.out.println("[원의 넓이 계산 결과]");
         for (double radius : testCases) {
             double area = calculator.calculateArea(radius);
-            System.out.println("반지름이 " + radius + "인 원의 넓이: " + area);
+            System.out.println("반지름이 " + radius + "인 원의 넓이: " + Math.round(area * 100000) / 100000.0);
         }
     }
 }

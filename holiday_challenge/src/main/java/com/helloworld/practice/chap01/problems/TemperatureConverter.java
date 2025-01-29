@@ -21,7 +21,7 @@ public class TemperatureConverter {
     public double celsiusToFahrenheit(double celsius) {
 
         // 여기에 코드 작성(return 구문도 수정 필요하면 수정)
-        return 0.0;
+        return (celsius * 9 / 5) + 32;
     }
 
     public static void main(String[] args) {
