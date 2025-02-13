@@ -1,4 +1,4 @@
-package com.ohgiraffers.intro;
+package com.ohgiraffers.section02.uses.subsection01.generation;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
@@ -21,8 +21,21 @@ public class Application1 {
 
 //        Arrays.stream(sArr).forEach(System.out::println); // 이렇게 한 줄로 가능!
         System.out.println();
+
+        /* 설명. startInclusive ~ endExclusive - 1 인덱스 구간의 배열을 스트림으로 */
+        Stream<String> strStream2 = Arrays.stream(sArr, 0, 2);
+        strStream2.forEach(System.out::println);
         
-        /* 목차. 2. 컬렉션으로 스트림 생성 */
-        
+        /* 설명. 
+        *   Builder를 활용한 스트림 생성
+        *   builder는 statkc<T>로 되어 있는 메소드이며 호출 시 타입 파라미터를 메소드 호출 방식으로 전달한다 */
+        System.out.println("=== Builder로 스트림 생성 ===");
+        Stream<String> builderStream = Stream.<String>builder()
+                                            .add("홍길동")
+                                            .add("유관순")
+                                            .add("윤봉길")
+                                            .build();
+        builderStream.forEach(System.out::println);
+
     }
 }

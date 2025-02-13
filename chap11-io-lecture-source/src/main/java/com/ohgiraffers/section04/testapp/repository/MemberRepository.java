@@ -3,6 +3,7 @@ package com.ohgiraffers.section04.testapp.repository;
 import com.ohgiraffers.section04.testapp.aggregate.AccountStatus;
 import com.ohgiraffers.section04.testapp.aggregate.BloodType;
 import com.ohgiraffers.section04.testapp.aggregate.Member;
+import com.ohgiraffers.section04.testapp.stream.MyObjectOutput;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.EOFException;
@@ -98,5 +99,74 @@ public class MemberRepository {
             }
         }
         return returnMember;
+    }
+
+    public int selectLastMemberNo() {
+        Member lastMember = memberList.get(memberList.size() - 1);
+        return lastMember.getMemNo();
+
+    }
+
+    public int insertMember(Member member) {
+
+        /* 설명. 헤더가 추가되지 않는 ObjectOutputStream 클래스 정의(MyObjectOutputStream) */
+        MyObjectOutput moo = null;
+        int result = 0;
+
+        try {
+            moo = new MyObjectOutput(
+                    new BufferedOutputStream(
+                            /* 설명. append: true 해줘야 덮어쓰지 않고 이어서 입력됨 */
+                            new FileOutputStream(file, true)
+                    )
+            );
+
+            /* 설명. 파일에 신규 회원 추가 */
+            moo.writeObject(member);
+
+            /* 설명. 컬렉션에 신규 회원 추가 */
+            memberList.add(member);
+
+            result = 1;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if(moo != null) moo.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        return result;
+    }
+
+    /* 설명. 수정된 사본이 넘어오면 컬렉션에 담긴 동일한 회원을 update 후 파일 덮어씌우기 */
+    public int updateMember(Member reformedMember) {
+        System.out.println("넘어온 정보: " + reformedMember);
+        for (int i = 0; i < memberList.size(); i++) {
+            if(memberList.get(i).getMemNo() == reformedMember.getMemNo()) {
+                memberList.set(i, reformedMember); // 컬렉션 업데이트
+                saveMembers(memberList); // 파일 업데이트
+                return 1;
+            }
+        }
+
+        return 0;
+    }
+
+    /* 설명. soft delete(일종의 업데이트)를 통해 회원 탈퇴를 구성 */
+    public int deleteMember(int removeMemNo) {
+        int result = 0;
+
+        for (Member mem: memberList) {
+            if (mem.getMemNo() == removeMemNo) {
+                mem.setAccountStatus(AccountStatus.DEACTIVATE);
+                result = 1;
+                saveMembers(memberList);
+            }
+        }
+
+        return result;
     }
 }
