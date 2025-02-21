@@ -1,8 +1,8 @@
 package com.ohgiraffers.section06.statickeyword;
 
 public class StaticTest {
-    private int nonStaticCount;        // 스택에 저장됨
-    private static int staticCount;    // 스택에 저장됨
+    private int nonStaticCount;
+    private static int staticCount;
 
     public StaticTest() {
     }

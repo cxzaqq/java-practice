@@ -147,8 +147,7 @@ public class ParameterizedTests {
     }
 
     /* 목차. 5. @MethodSource를 활용한 메소드 인수 활용하기 */
-    /* 필기. Stream을 반환하는 메소드를 만들어서 이를 테스트에 활용할 수 있다. */
-
+    /* 설명. Stream을 반환하는 메소드를 만들어서 이를 테스트에 활용할 수 있다. */
     private static Stream<Arguments> providerStringSource() {
 
         return Stream.of(

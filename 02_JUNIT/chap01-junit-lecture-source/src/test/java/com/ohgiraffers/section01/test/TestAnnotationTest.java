@@ -17,7 +17,7 @@ public class TestAnnotationTest {
     *   @Test는 기본적인 테스트 메소드를 만들기 위해 사용하는 어노테이션이다.
     *   (main 메소드 없이 단독 실행 가능) */
     @Test
-    @DisplayName(("테스트 메소드가 통과하는지 확인"))
+    @DisplayName("테스트 메소드가 통과하는지 확인")
     public void testMethod() {
 
     }
