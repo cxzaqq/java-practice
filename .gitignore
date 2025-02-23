@@ -43,3 +43,6 @@ bin/
 
 ### Properties ###
 *.properties
+
+### Tomcat ###
+dev/

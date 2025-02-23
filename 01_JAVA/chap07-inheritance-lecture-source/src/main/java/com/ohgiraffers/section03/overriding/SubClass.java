@@ -37,7 +37,7 @@ public class SubClass extends SuperClass {
     /* 설명. 다른 패키지더라도 상속관계이므로 오버라이딩 가능 */
     @Override
     protected void protectedMethod() {}
-//    public void protectedMethod(); // 더 큰 범위로 접근 제어자를 변경 가능
+//    public void protectedMethod() {}; // 더 큰 범위로 접근 제어자를 변경 가능
     
     /* 설명. 다른 패키지면 오버라이딩 불가 */
     @Override
