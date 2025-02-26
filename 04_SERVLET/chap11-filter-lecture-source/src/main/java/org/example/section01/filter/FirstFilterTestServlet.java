@@ -1,4 +1,4 @@
-package org.example.filter;
+package org.example.section01.filter;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

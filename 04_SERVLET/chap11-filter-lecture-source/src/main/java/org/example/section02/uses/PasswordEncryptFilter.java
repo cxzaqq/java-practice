@@ -1,4 +1,23 @@
 package org.example.section02.uses;
 
-public class PasswordEncryptFilter {
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.annotation.WebFilter;
+import jakarta.servlet.http.HttpServletRequest;
+import java.io.IOException;
+
+@WebFilter("/member/*")
+public class PasswordEncryptFilter implements Filter {
+    @Override
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
+            throws IOException, ServletException {
+
+        /* 설명. 기존의 Reqeust 객체가 아닌 우리가 getParameter()를 재정의한 Request 객체로 교체한다. */
+        RequestWrapper wrapper = new RequestWrapper((HttpServletRequest) servletRequest);
+
+        filterChain.doFilter(wrapper, servletResponse);
+    }
 }

@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/session")
-public class SessionListenerServlet extends HttpServlet {
+public class SessionListenerTestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -21,7 +21,9 @@ public class SessionListenerServlet extends HttpServlet {
         session.setAttribute("userName", "hong");
         session.setAttribute("age", 20);
         session.setAttribute("age", 21);
-
         session.removeAttribute("userName");
+
+        session.setAttribute("user", new UserDTO("hong", 21));
+        session.removeAttribute("user");
     }
 }
