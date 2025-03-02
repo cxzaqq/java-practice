@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 처음 가져오는 건 이름을 따로 안 정해도 되지만 이후는 이름을 지정해야 함-->
+<!-- 처음 가져오는 건 이름을 따로 안 정해도 되지만 이후는 이름을 지정해야 함
+     xmlns(extensible markup language name space -->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"

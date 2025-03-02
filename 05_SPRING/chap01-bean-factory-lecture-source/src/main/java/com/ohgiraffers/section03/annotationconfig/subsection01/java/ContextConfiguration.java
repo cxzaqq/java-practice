@@ -13,7 +13,8 @@ import org.springframework.context.annotation.FilterType;
 /* 설명. 1. 기본적으로는 설정파일이 있는 패키지 및 하위만 Scan하지만 basePackages를 바꾸면 다른 범위까지 가능하다. */
 //@ComponentScan(basePackages = "com.ohgiraffers")
 
-/* 설명. 2. 범위 및 필터를 적용해서 제외하고자 하는 bean을 등록하는 경우(excludeFilters) */
+/* 설명. 2. 범위 및 필터를 적용해서 제외하고자 하는 bean을 등록하는 경우(excludeFilters)
+*           (Blacklist 방식) */
 //@ComponentScan(basePackages = "com.ohgiraffers", excludeFilters = {
 //        @ComponentScan.Filter(
 //                /* 설명. 2-1. 타입으로 설정 */
@@ -26,7 +27,8 @@ import org.springframework.context.annotation.FilterType;
 //        )
 //})
 
-/* 설명. 3. 범위 및 필터를 적용해서 등록하고자 하는 bean을 등록하는 경우(includeFilters) */
+/* 설명. 3. 범위 및 필터를 적용해서 등록하고자 하는 bean을 등록하는 경우(includeFilters)
+*           (Whitelist 방식) */
 @ComponentScan(basePackages = {"com.ohgiraffers", "com"},
                 useDefaultFilters = false,                      // 현재 설정 파일 bean 제외 나머지는 off
                 includeFilters = {
