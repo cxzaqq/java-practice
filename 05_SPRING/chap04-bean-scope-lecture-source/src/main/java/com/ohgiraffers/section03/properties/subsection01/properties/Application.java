@@ -14,8 +14,10 @@ public class Application {
 
         Product carpBread = context.getBean("carpBread", Bread.class);
         Product milk = context.getBean("milk", Beverage.class);
+        Product water = context.getBean("water", Beverage.class);
 
         System.out.println("carpBread = " + carpBread);
         System.out.println("milk = " + milk);
+        System.out.println("water = " + water);
     }
 }

@@ -9,12 +9,6 @@ build/
 .idea/jarRepositories.xml
 .idea/compiler.xml
 .idea/libraries/
-
-**/.idea/gradle.xml
-**/.idea/misc.xml
-**/.idea/vcs.xml
-**/.idea/
-
 *.iws
 *.iml
 *.ipr
@@ -46,6 +40,3 @@ bin/
 
 ### Mac OS ###
 .DS_Store
-
-### Tomcat ###
-dev/
