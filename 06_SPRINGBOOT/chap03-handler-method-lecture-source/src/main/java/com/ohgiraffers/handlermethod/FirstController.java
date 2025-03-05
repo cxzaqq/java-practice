@@ -85,7 +85,8 @@ public class FirstController {
     *   => 커맨드 객체(사용자의 입력을 받아낼 클래스) (bean X)
     *
     *  설명.
-    *   @ModelAttribute 어노테이션을 활용하면 커맨드 객체를 모델에 attribute로 담아주며 이후 view의 재료로 사용할 수 있다.
+    *   커맨드 객체 사용 시 자동으로 Model 객체에 추가해 줌 (객체 이름의 첫 글자를 소문자로)
+    *   @ModelAttribute 어노테이션을 활용하면 커맨드 객체의 이름을 바꿔서 Model 객체에 추가할 수 있음
     *   (키 값 작성 유무에 따라 화면에서 활용하는 방법이 다르다) */
     public String searchMenu(@ModelAttribute("menu") MenuDTO menu) {
         System.out.println("menu = " + menu);
