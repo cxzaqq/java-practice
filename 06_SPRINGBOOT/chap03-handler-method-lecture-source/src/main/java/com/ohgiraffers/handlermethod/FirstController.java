@@ -1,17 +1,26 @@
 package com.ohgiraffers.handlermethod;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 @Controller
 @RequestMapping("/first")
+/* 설명. 이 Controller Class의 handler method에서 Model에 "id"라는 키 값으로 담긴 값은 HttpSession에도 추가하라는 어노테이션 */
+/* 설명. HttpSession에서 제공하는 invalidate()가 아닌 SessionStatus가 제공하는 setComplete()를 통해 만료시킬 수 있다. */
+@SessionAttributes("id") // model에 id가 있으면 이걸 세션에도 담아라
 public class FirstController {
     @GetMapping("/regist")
     public String regist() {
@@ -91,5 +100,55 @@ public class FirstController {
     public String searchMenu(@ModelAttribute("menu") MenuDTO menu) {
         System.out.println("menu = " + menu);
         return "first/searchResult";
+    }
+
+    @GetMapping("login")
+    public void login() {}
+
+    @PostMapping("login")
+    /* 설명. id, pwd는 @RequestParam이 생략된 것 */
+    public String sessionTest1(String id, String pwd, HttpSession session) {
+        System.out.println("id = " + id);
+        System.out.println("pwd = " + pwd);
+
+        /* 설명. 로그인 성공 가정 HttpSession에 로그인 성공한 회원 정보 저장 */
+        session.setAttribute("id", id);
+        session.setAttribute("pwd", pwd);
+        return "first/loginResult";
+    }
+
+    @GetMapping("logout1")
+    public String logoutTest1(HttpSession session) {
+        session.invalidate();
+
+        return "first/loginResult";
+    }
+
+    /* 설명. Model에 담은 값 중에 일부를 HttpSession에 자동으로 담도록 어노테이션 활용 */
+    @PostMapping("login2")
+    public String sessionTest2(Model model, String id) {
+        model.addAttribute("id", id);
+
+        return "first/loginResult";
+    }
+
+    @GetMapping("logout2")
+    public String logoutTest2(SessionStatus sessionStatus) {
+        /* 설명. 내부적으로 세션 데이터가 어노테이션으로 담기면 session.invalidate()로 무효화가 안 되게 되어있음 */
+        sessionStatus.setComplete();
+
+        return "first/loginResult";
+    }
+
+    @GetMapping("body")
+    public void body() {}
+
+    @PostMapping("body")
+    public void body(@RequestBody String body,
+                     @RequestHeader("content-type") String contentType,
+                     @CookieValue(value="JSESSIONID") String sessionId) {
+        System.out.println("body = " + body);
+        System.out.println("contentType = " + contentType);
+        System.out.println("sessionId = " + sessionId);
     }
 }
