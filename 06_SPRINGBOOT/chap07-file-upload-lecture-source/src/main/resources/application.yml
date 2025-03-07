@@ -1,0 +1,14 @@
+spring:
+  servlet:
+    multipart:
+
+      # 파일 한 개당 용량
+      max-file-size: 10MB
+
+      # 요청 당 용량(파일이 여러개일 수도)
+      max-request-size: 10MB
+  web:
+    resources:
+      static-locations: file:///D:\SWCamp\uploadFiles
+
+filepath: D:\\SWCamp\\uploadFiles
