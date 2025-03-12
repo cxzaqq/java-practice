@@ -18,6 +18,24 @@ public class ElementService {
     }
 
     public void selectResultMapAssociationTest() {
+        SqlSession sqlSession = getSqlSession();
 
+        ElementMapper mapper = sqlSession.getMapper(ElementMapper.class);
+
+        List<MenuAndCategoryDTO> menus = mapper.selectResultMapAssociationTest();
+        menus.forEach(System.out::println);
+
+        sqlSession.close();
+    }
+
+    public void selectResultMapCollectionTest() {
+        SqlSession sqlSession = getSqlSession();
+
+        ElementMapper mapper = sqlSession.getMapper(ElementMapper.class);
+
+        List<CategoryAndMenuDTO> categories = mapper.selectResultMapCollectionTest();
+        categories.forEach(System.out::println);
+
+        sqlSession.close();
     }
 }

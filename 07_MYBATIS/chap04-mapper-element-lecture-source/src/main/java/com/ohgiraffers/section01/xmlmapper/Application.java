@@ -21,6 +21,7 @@ public class Application {
                     es.selectResultMapAssociationTest();
                     break;
                 case 3:
+                    es.selectResultMapCollectionTest();
                     break;
             }
 
