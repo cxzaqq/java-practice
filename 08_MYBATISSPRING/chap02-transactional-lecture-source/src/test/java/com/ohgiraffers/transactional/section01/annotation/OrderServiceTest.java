@@ -14,8 +14,10 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
+@Transactional // test 시 insert가 DB에 실제로 일어나지 않도록 함
 class OrderServiceTest {
 
     @Autowired
