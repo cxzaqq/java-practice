@@ -1,0 +1,16 @@
+server:
+  port: 0
+
+spring:
+  application:
+    name: 2nd-service
+
+eureka:
+  instance:
+    # eureka server에 등록되는 인스턴스의 id가 달라지게
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka

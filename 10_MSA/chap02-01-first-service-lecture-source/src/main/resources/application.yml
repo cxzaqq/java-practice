@@ -1,0 +1,19 @@
+server:
+#  port: 8111
+
+  # 서버 구동 시마다 랜덤하게 포트가 할당됨(경험 상 50000 ~ 60000 대가 나옴)
+  port: 0
+
+spring:
+  application:
+    name: 1st-service
+
+eureka:
+  instance:
+    # eureka server에 등록되는 인스턴스의 id가 달라지게
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka

@@ -1,0 +1,33 @@
+server:
+  # 관례상 gateway는 8000번을 사용함
+  port: 8000
+
+spring:
+  application:
+    name: gateway-server
+  cloud:
+    gateway:
+      routes:
+        - id: 1st-service-get
+#          uri: http://localhost:54113/
+          # 서비스 이름으로 load balancing 하겠다. => 포트 번호를 신경 안 써도 된다.
+          uri: lb://1ST-SERVICE
+          predicates:
+            - Path=/first-service/**
+          filters:
+            # 실제 요청에는 /first-service 접두사가 포함되지 않게 필터링
+            - RewritePath=/first-service/(?<segment>.*), /$\{segment}
+
+        - id: 2nd-service-get
+          uri: lb://2ND-SERVICE
+          predicates:
+            - Path=/second-service/**
+          filters:
+            - RewritePath=/second-service/(?<segment>.*), /$\{segment}
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka

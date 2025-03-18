@@ -2,6 +2,7 @@ package com.ohgiraffers.springdatajpa.menu.controller;
 
 import com.ohgiraffers.springdatajpa.common.Pagination;
 import com.ohgiraffers.springdatajpa.common.PagingButtonInfo;
+import com.ohgiraffers.springdatajpa.menu.dto.CategoryDTO;
 import com.ohgiraffers.springdatajpa.menu.dto.MenuDTO;
 import com.ohgiraffers.springdatajpa.menu.service.MenuService;
 import java.util.List;
@@ -16,7 +17,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/menu")
@@ -86,5 +90,60 @@ public class MenuController {
         model.addAttribute("paging", paging);
 
         return "menu/list";
+    }
+
+    @GetMapping("querymethod")
+    public void queryMethodPage() {}
+
+    @GetMapping("search")
+    /* 설명. @RequestParam은 생략 가능(클라이언트에서 넘겨준 이름과 같아야 함) */
+//    public String findMenuPrice(int menuPrice, Model model) {
+    public String findMenuPrice(@RequestParam int menuPrice, Model model) {
+        List<MenuDTO> menuList = menuService.findMenuPrice(menuPrice);
+        model.addAttribute("menuList", menuList);
+        model.addAttribute("menuPrice", menuPrice);
+
+        return "menu/searchResult";
+    }
+
+    @GetMapping("regist")
+    public void registMenuPage() {}
+
+    @GetMapping("category")
+    /* 설명. @ResponseBody를 사용하면 반환 데이터가 json 문자열로 알아서 조립되어 반환됨
+    *   viewResolver를 이제 거치지 않음 */
+    @ResponseBody
+    public List<CategoryDTO> findCategoryList() {
+        return menuService.findAllCategory();
+    }
+
+    @PostMapping("regist")
+    /* 설명. 커맨드 객체 */
+    public String registMenu(MenuDTO newMenu) {
+//        log.debug(newMenu.toString());
+        menuService.registMenu(newMenu);
+
+        return "redirect:/menu/list";
+    }
+
+    @GetMapping("modify")
+    public void modifyMenuPage() {}
+
+    @PostMapping("modify")
+    public String modifyMenu(MenuDTO modifyMenu) {
+        menuService.modifyMenu(modifyMenu);
+
+        return "redirect:/menu/" + modifyMenu.getMenuCode();
+    }
+
+    @GetMapping("delete")
+    public void deleteMenuPage() {}
+
+    @PostMapping("delete")
+    public String deleteMenu(@RequestParam int menuCode) {
+
+        menuService.deleteMenu(menuCode);
+
+        return "redirect:/menu/list";
     }
 }
