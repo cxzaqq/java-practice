@@ -10,13 +10,19 @@ spring:
       routes:
         - id: 1st-service-get
 #          uri: http://localhost:54113/
-          # 서비스 이름으로 load balancing 하겠다. => 포트 번호를 신경 안 써도 된다.
+          # 서비스 이름으로 load balancing 하겠다. => 포트 번호를 신경 안 써도 된다.(eureka 서버의 대시보드에서 이름 확인)
           uri: lb://1ST-SERVICE
+          
+          # 게이트웨이 요청이 아래와 같은 패턴으로 온다면(일종의 조건문)
           predicates:
             - Path=/first-service/**
+              
+          # 이후 라우팅 될 마이크로 서비스에 /first-service라는 접두사가 제외되어 요청되게 할 내용 + 필터
           filters:
             # 실제 요청에는 /first-service 접두사가 포함되지 않게 필터링
             - RewritePath=/first-service/(?<segment>.*), /$\{segment}
+            - AddRequestHeader=first-request, first-request-header    # 전처리
+            - AddResponseHeader=first-response, first-response-header # 후처리
 
         - id: 2nd-service-get
           uri: lb://2ND-SERVICE
